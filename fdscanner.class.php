@@ -12,11 +12,20 @@ class FDScanner
 {
     protected $mainPath;
 
+
+    /**
+     * @param string $customPath Main Path Costumize
+     */
     public function __construct(string $customPath = null)
     {
         $this->mainPath = $customPath != null ? $customPath : dirname(__FILE__);
     }
 
+    /**
+     * Directory List
+     * @param string $listPath Locked Path - Default: Main Path
+     * @return array
+     */
     public function list(string $listPath = null): array
     {
         $listPath = $this->implodePath($listPath);
@@ -38,6 +47,11 @@ class FDScanner
         return $this->checkArray($respond);
     }
 
+    /**
+     * Read File
+     * @param string $readPath Read File Path
+     * @return string
+     */
     public function oneReadFile(string $readPath): string
     {
         $readPath = $this->implodePath($readPath);
@@ -58,6 +72,11 @@ class FDScanner
         return $this->checkString($respond);
     }
 
+    /**
+     * Read Files
+     * @param string $readPath Read Files Path
+     * @return array
+     */
     public function manyReadFile(string $readPath): array
     {
         $readPath = $this->implodePath($readPath);
@@ -67,6 +86,10 @@ class FDScanner
         if ($handle = opendir($readPath)) {
 
             while (false !== ($entry = readdir($handle))) {
+
+                $expEntry = explode(".", $entry);
+                if(!isset($expEntry[1])) continue;
+
 
                 if ($entry != "." && $entry != "..") {
 
@@ -92,6 +115,13 @@ class FDScanner
 
         return $this->checkArray($respond);
     }
+
+    /**
+     * Search File
+     * @param string $fileName Searching File
+     * @param string $searchPath Search Path
+     * @return array
+     */
 
     public function searchFileName(string $fileName, string $searchPath = null): array
     {
@@ -119,6 +149,12 @@ class FDScanner
         return $this->checkArray($respond);
     }
 
+    /**
+     * Search File With Extentions
+     * @param string $fileNameExtentions Searching File Name Extentions
+     * @param string $searchPath Search Path
+     * @return array
+     */
     public function searchFileNameExtentions(string $fileNameExtentions, string $searchPath = null): array
     {
         $searchPath = $this->implodePath($searchPath);
@@ -144,6 +180,11 @@ class FDScanner
         return $this->checkArray($respond);
     }
 
+    /**
+     * Custom Path Imploder
+     * @param string $addingPath Add Path
+     * @return string
+     */
     private function implodePath(string $addingPath = null): string
     {
 
@@ -154,6 +195,11 @@ class FDScanner
         return $this->mainPath;
     }
 
+    /**
+     * Check Respond Array
+     * @param array $respond Respond Array
+     * @return array
+     */
     private function checkArray(array $respond): array
     {
         if (count($respond) == 0) {
@@ -163,6 +209,11 @@ class FDScanner
         return $respond;
     }
 
+    /**
+     * Check Respond String
+     * @param array $respond Respond String
+     * @return string
+     */
     private function checkString(string $respond): string
     {
         if (strlen($respond) == 0) {
