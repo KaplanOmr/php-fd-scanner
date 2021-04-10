@@ -1,25 +1,37 @@
 # php-fd-scanner
 PHP File/Directory Scanner
 
-`require('fdscanner.class.php');
-$fd = new FDScanner;`
+```php
+require('fdscanner.class.php');
+$fd = new FDScanner;
+```
 
 **Directory List**
 
-`$fd->list();`
+```php
+$fd->list();
+```
 
 **Read One File**
 
-`$fd->oneReadFile();`
+```php
+$fd->oneReadFile();
+```
 
 **Read Many File**
 
-`$fd->manyReadFile();`
+```php
+$fd->manyReadFile();
+```
 
 **Search File Name**
 
-`$fd->searchFileName('file');`
+```php
+$fd->searchFileName('file');
+```
 
 **Search File Name Extentions**
 
-`$fd->searchFileNameExtentions('txt');`
+```php 
+$fd->searchFileNameExtentions('txt');
+```
